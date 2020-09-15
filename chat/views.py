@@ -51,7 +51,7 @@ def message_list(request, sender=None, receiver=None):
     """
     if request.method == 'GET':
         messages = Message.objects.filter(sender_id=sender, receiver_id=receiver, is_read=False)
-        serializer = MessageSerializer(messages, many=True, context={'request': request})
+        serializer = MessageSerializer(messages, many=True)
         for message in messages:
             message.is_read = True
             message.save()
@@ -66,6 +66,15 @@ def message_list(request, sender=None, receiver=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+def show_conversation(request, sender=None, receiver=None):
+    """
+    List all required messages, or create a new message.
+    """
+    if request.method == 'GET':
+        messages = Message.objects.filter(sender_id=sender, receiver_id=receiver)
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET'])

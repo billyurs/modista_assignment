@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('api/messages/<int:sender>/<int:receiver>', views.message_list, name='message-detail'),
+    path('api/showmessages/<int:sender>/<int:receiver>', views.show_conversation, name='show-converstaion'),
     path('api/messages', views.message_list, name='message-list'),
     path('api/users/', views.user_list, name='user-list'),
     path('api/setonline/', views.set_online, name='set-online'),
