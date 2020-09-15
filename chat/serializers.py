@@ -13,8 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    sender = serializers.SlugRelatedField(many=False, slug_field='username', queryset=User.objects.all())
-    receiver = serializers.SlugRelatedField(many=False, slug_field='username', queryset=User.objects.all())
+    sender = serializers.SlugRelatedField(many=False, slug_field='id', queryset=User.objects.all())
+    receiver = serializers.SlugRelatedField(many=False, slug_field='id', queryset=User.objects.all())
 
     class Meta:
         model = Message
